@@ -1,11 +1,10 @@
-Sustituye en GitHub los archivos index.html, app.js y style.css por estos tres.
+VERSIÓN V4
 
-Mantiene el mismo motor ZXing-WASM y los mismos parámetros del escáner publicado que ya ha funcionado.
-Añade:
-- Ubicación y despacho (seleccionables/escribibles).
-- Nombre de lote automático.
-- Guardar lotes en localStorage del dispositivo.
-- Menú desplegable de lotes guardados.
-- Exportación CSV compatible con Excel.
-- Clasificación conservadora de etiqueta de inventario (6 dígitos) y códigos alfanuméricos.
-- Los códigos que empiezan por 1S se marcan como posible código de fabricante/nº serie, pero NO se recorta el serial hasta validar cadenas reales.
+Cambio solicitado:
+- Si una lectura comienza por 1S, se elimina únicamente ese prefijo.
+- NO se intenta dividir el resto del código en número de serie / modelo / tipo.
+- Se conserva completa la cadena restante porque habrá portátiles de distintos fabricantes y modelos.
+- Las etiquetas exactamente de 6 dígitos siguen clasificándose como Etiqueta inventario.
+- El valor original leído por ZXing se conserva internamente en el lote y en la exportación CSV.
+
+Sustituye en GitHub index.html, app.js y style.css por los incluidos.

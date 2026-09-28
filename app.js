@@ -5,11 +5,18 @@ const LOT_KEY='invenscan_saved_lots_v3';
 
 function status(t){$('#status').textContent=t}
 function classify(text){
- const v=(text||'').trim().toUpperCase();
- if(/^\d{6}$/.test(v)) return {type:'Etiqueta inventario',value:v};
- if(/^1S[A-Z0-9-]+/.test(v)) return {type:'Código fabricante / posible nº serie',value:v};
- if(/^[A-Z0-9-]{6,24}$/.test(v)&&/[A-Z]/.test(v)&&/\d/.test(v)) return {type:'Nº serie / código alfanumérico',value:v};
- return {type:'Código de barras',value:v};
+ const raw=(text||'').trim().toUpperCase();
+ if(/^\d{6}$/.test(raw)) return {type:'Etiqueta inventario',value:raw};
+
+ // Algunos fabricantes codifican varios campos en una sola lectura.
+ // No intentamos separar posiciones que pueden variar entre modelos.
+ // Solo quitamos el identificador inicial "1S" cuando realmente está al principio,
+ // y conservamos TODO el resto de la lectura para no perder información.
+ const value=/^1S[A-Z0-9]/.test(raw) ? raw.slice(2) : raw;
+
+ if(/^[A-Z0-9-]{6,}$/.test(value)&&/[A-Z]/.test(value)&&/\d/.test(value))
+   return {type:'Nº serie / código fabricante',value};
+ return {type:'Código de barras',value};
 }
 function render(){
  $('#count').textContent=codes.length;$('#items').className=codes.length?'':'empty';

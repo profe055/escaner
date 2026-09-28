@@ -1,0 +1,9 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prueba clasificación</title>
+<style>body{font-family:system-ui;margin:0;background:#f4f7fb;color:#10233f}.w{max-width:700px;margin:auto;padding:20px}input,button{font-size:18px;padding:14px;border-radius:12px}input{width:100%;box-sizing:border-box;border:1px solid #bbb}button{margin-top:10px;background:#123d70;color:#fff;border:0;font-weight:700}.card{background:#fff;padding:18px;border-radius:16px;margin-top:15px}.v{font-size:28px;font-weight:800;word-break:break-all}.t{font-weight:800;color:#315b89}</style></head><body><div class="w"><h1>Clasificador de lecturas</h1><p>Pega exactamente lo que devuelve el escáner.</p><input id="x" placeholder="Ej. 208488 o 1SPF-5N7WPQ..."><button onclick="go()">Identificar</button><div class="card"><div id="t" class="t">—</div><div id="v" class="v">—</div><div id="r"></div></div></div>
+<script>
+function classify(s){let v=s.trim().toUpperCase();if(/^\d{6}$/.test(v))return["ETIQUETA INVENTARIO",v];
+let m=v.match(/^1S([A-Z0-9-]{6,20})/);if(m)return["POSIBLE Nº SERIE LENOVO",m[1]];
+if(/^[A-Z0-9][A-Z0-9-]{5,19}$/.test(v)&&/[A-Z]/.test(v)&&/\d/.test(v))return["Nº SERIE / CÓDIGO ALFANUMÉRICO",v];
+return["CÓDIGO SIN CLASIFICAR",v]}
+function go(){let raw=document.getElementById("x").value,[t,v]=classify(raw);document.getElementById("t").textContent=t;document.getElementById("v").textContent=v;document.getElementById("r").textContent="Original: "+raw}
+</script></body></html>

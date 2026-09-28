@@ -1,0 +1,1 @@
+index.html conserva el escáner probado. clasificador.html permite probar la clasificación de la cadena exacta devuelta por el código. Para integrar extracción automática fiable del serial Lenovo necesito validar varias cadenas reales; no se fijan posiciones inventadas.

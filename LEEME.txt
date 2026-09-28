@@ -1,1 +1,11 @@
-index.html conserva el escáner probado. clasificador.html permite probar la clasificación de la cadena exacta devuelta por el código. Para integrar extracción automática fiable del serial Lenovo necesito validar varias cadenas reales; no se fijan posiciones inventadas.
+Sustituye en GitHub los archivos index.html, app.js y style.css por estos tres.
+
+Mantiene el mismo motor ZXing-WASM y los mismos parámetros del escáner publicado que ya ha funcionado.
+Añade:
+- Ubicación y despacho (seleccionables/escribibles).
+- Nombre de lote automático.
+- Guardar lotes en localStorage del dispositivo.
+- Menú desplegable de lotes guardados.
+- Exportación CSV compatible con Excel.
+- Clasificación conservadora de etiqueta de inventario (6 dígitos) y códigos alfanuméricos.
+- Los códigos que empiezan por 1S se marcan como posible código de fabricante/nº serie, pero NO se recorta el serial hasta validar cadenas reales.
